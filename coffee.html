@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velvet Roast Coffee | Roastery & Cafe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --gold: #d4af37;
+            --dark: #0f0a07;
+            --light: #fcfcf9;
+        }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            scroll-behavior: smooth;
+        }
+
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .nav-scrolled {
+            background-color: var(--dark) !important;
+            padding-top: 1rem !important;
+            padding-bottom: 1rem !important;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background-color: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.7s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+        }
+
+        nav {
+            will-change: padding, background-color;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 bg-transparent py-8 px-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-serif font-bold tracking-tighter cursor-pointer text-white" onclick="showPage('home')">
+                VELVET<span class="text-[#d4af37]">ROAST</span>
+            </div>
+
+            <div class="hidden md:flex space-x-10 items-center">
+                <button onclick="showPage('home')" class="nav-link active text-xs uppercase tracking-[0.2em] text-white/80 hover:text-white relative pb-1 font-medium transition-all" data-page="home">Home</button>
+                <button onclick="showPage('menu')" class="nav-link text-xs uppercase tracking-[0.2em] text-white/80 hover:text-white relative pb-1 font-medium transition-all" data-page="menu">Menu</button>
+                <button onclick="showPage('book')" class="nav-link text-xs uppercase tracking-[0.2em] text-white/80 hover:text-white relative pb-1 font-medium transition-all" data-page="book">Book Table</button>
+                <button onclick="showPage('about')" class="nav-link text-xs uppercase tracking-[0.2em] text-white/80 hover:text-white relative pb-1 font-medium transition-all" data-page="about">About</button>
+                <button onclick="showPage('visit')" class="nav-link text-xs uppercase tracking-[0.2em] text-white/80 hover:text-white relative pb-1 font-medium transition-all" data-page="visit">Visit</button>
+            </div>
+
+            <button class="md:hidden text-white" onclick="toggleMobileMenu(true)">
+                <i data-lucide="menu" size="28"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobileMenu" class="fixed inset-0 bg-[#0f0a07] z-[60] flex-col items-center justify-center space-y-8 hidden">
+        <button class="absolute top-8 right-8 text-white" onclick="toggleMobileMenu(false)">
+            <i data-lucide="x" size="32"></i>
+        </button>
+        <button onclick="showPage('home')" class="text-4xl font-serif text-white hover:text-[#d4af37] transition-colors">Home</button>
+        <button onclick="showPage('menu')" class="text-4xl font-serif text-white hover:text-[#d4af37] transition-colors">Menu</button>
+        <button onclick="showPage('book')" class="text-4xl font-serif text-white hover:text-[#d4af37] transition-colors">Book Table</button>
+        <button onclick="showPage('about')" class="text-4xl font-serif text-white hover:text-[#d4af37] transition-colors">About</button>
+        <button onclick="showPage('visit')" class="text-4xl font-serif text-white hover:text-[#d4af37] transition-colors">Visit</button>
+    </div>
+
+    <!-- Pages Container -->
+    <div id="page-content">
+        <!-- Home Page -->
+        <section id="home" class="page-section fade-in">
+            <div class="relative h-screen flex items-center justify-center overflow-hidden">
+                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=2070')] bg-cover bg-center">
+                    <div class="absolute inset-0 bg-black/60"></div>
+                </div>
+                <div class="relative text-center px-6">
+                    <h1 class="text-6xl md:text-8xl font-serif text-white mb-8 leading-tight">
+                        Slow-Roasted.<br/>
+                        <span class="italic font-light text-[#d4af37]">Bold-Flavoured.</span><br/>
+                        Unforgettable.
+                    </h1>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <button onclick="showPage('book')" class="bg-[#d4af37] text-black px-10 py-5 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-white transition-all">Book Table</button>
+                        <button onclick="showPage('menu')" class="border border-white/30 text-white backdrop-blur-sm px-10 py-5 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-white hover:text-black transition-all">View Menu</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu Page -->
+        <section id="menu" class="page-section pt-40 pb-20 px-6 bg-[#fcfcf9] min-h-screen hidden">
+            <div class="max-w-7xl mx-auto text-center">
+                <h1 class="text-6xl font-serif mb-4 text-[#0f0a07]">Our Menu</h1>
+                <p class="text-gray-400 italic mb-12 text-lg">Seasonal ingredients, expertly crafted.</p>
+                
+                <div class="flex flex-wrap justify-center gap-4 mb-20">
+                    <button onclick="filterMenu('ALL')" class="filter-btn bg-[#d4af37] border-[#d4af37] text-black px-10 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 border shadow-lg" data-filter="ALL">ALL</button>
+                    <button onclick="filterMenu('COFFEE')" class="filter-btn bg-white border-gray-100 text-gray-400 px-10 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 border hover:border-gray-300" data-filter="COFFEE">COFFEE</button>
+                    <button onclick="filterMenu('PASTRY')" class="filter-btn bg-white border-gray-100 text-gray-400 px-10 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 border hover:border-gray-300" data-filter="PASTRY">PASTRY</button>
+                    <button onclick="filterMenu('LUNCH')" class="filter-btn bg-white border-gray-100 text-gray-400 px-10 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 border hover:border-gray-300" data-filter="LUNCH">LUNCH</button>
+                </div>
+
+                <div id="menu-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-12 text-left">
+                    <!-- Menu items will be injected by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Book Page -->
+        <section id="book" class="page-section pt-32 pb-20 px-6 bg-[#0f0a07] text-white min-h-screen flex items-center justify-center hidden">
+            <div id="booking-form-container" class="max-w-md w-full bg-[#140e0a] rounded-[40px] p-8 md:p-12 border border-white/5 shadow-2xl">
+                <form id="booking-form" class="space-y-6">
+                    <div class="text-center mb-8">
+                        <h1 class="text-4xl font-serif mb-2 italic text-white">Book a Table</h1>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] uppercase tracking-[0.2em] text-white/40 font-bold">Full Name</label>
+                        <input required type="text" placeholder="Enter your name" class="w-full bg-[#1d1611] border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-[#d4af37] transition-all">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <label class="text-[10px] uppercase tracking-[0.2em] text-white/40 font-bold">Date</label>
+                            <input required type="date" class="w-full bg-[#1d1611] border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-[#d4af37]">
+                        </div>
+                        <div class="space-y-2 relative">
+                            <label class="text-[10px] uppercase tracking-[0.2em] text-white/40 font-bold">Guests</label>
+                            <div class="relative">
+                                <select required class="w-full bg-[#1d1611] border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-[#d4af37] appearance-none cursor-pointer">
+                                    <option value="1">1 Guest</option>
+                                    <option value="2">2 Guests</option>
+                                    <option value="4">4 Guests</option>
+                                    <option value="10">10+ Guests</option>
+                                </select>
+                                <i data-lucide="chevron-down" class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/30" size="16"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] uppercase tracking-[0.2em] text-white/40 font-bold">Time Preference</label>
+                        <div class="relative">
+                            <select required class="w-full bg-[#1d1611] border border-white/10 p-4 rounded-2xl text-white outline-none focus:border-[#d4af37] appearance-none cursor-pointer">
+                                <option value="" disabled selected>Select a slot</option>
+                                <option value="morning">Morning (09:00 - 11:30)</option>
+                                <option value="brunch">Brunch (11:30 - 13:30)</option>
+                                <option value="lunch">Lunch (13:30 - 15:30)</option>
+                                <option value="evening">Evening (19:30 - 21:30)</option>
+                            </select>
+                            <i data-lucide="chevron-down" class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/30" size="16"></i>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full bg-[#d4af37] text-black py-5 rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-white transition-all shadow-lg">Confirm Booking</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- About Page -->
+        <section id="about" class="page-section pt-40 pb-20 px-6 bg-white min-h-screen hidden">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-24">
+                    <span class="text-[#d4af37] text-[10px] uppercase font-bold tracking-[0.4em] mb-4 block">Our Story</span>
+                    <h1 class="text-6xl font-serif mb-8 italic text-[#0f0a07]">Coffee is Science.<br/>Hospitality is Art.</h1>
+                </div>
+                <div class="grid md:grid-cols-2 gap-20 items-center">
+                    <div class="space-y-8 text-[#0f0a07]">
+                        <p class="text-xl leading-relaxed font-light italic">Founded with a desire to bring third-wave coffee culture to the heart of the city without the pretense.</p>
+                        <p class="text-gray-500 leading-relaxed font-light">We source single-origin beans directly from farmers we know, roasting them in-house to highlight the unique terroir of every region.</p>
+                    </div>
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=2070" class="rounded-[40px] shadow-2xl relative z-10" alt="Coffee Pour">
+                        <div class="absolute -bottom-6 -right-6 w-full h-full border-2 border-[#d4af37] rounded-[40px] z-0"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visit Page -->
+        <section id="visit" class="page-section pt-32 pb-20 px-6 bg-[#0f0a07] text-white min-h-screen hidden">
+            <div class="max-w-7xl mx-auto flex flex-col items-center">
+                <h1 class="text-7xl font-serif mb-16 italic text-center">Visit Us.</h1>
+                <div class="mb-16 w-full max-w-5xl h-[500px] rounded-[60px] overflow-hidden shadow-2xl relative">
+                    <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=2047" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000" alt="Cafe Interior">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 w-full max-w-5xl text-left">
+                    <div class="bg-white/5 p-12 rounded-[50px] border border-white/10 group">
+                        <i data-lucide="map-pin" class="text-[#d4af37] mb-8" size="32"></i>
+                        <h4 class="text-[10px] uppercase tracking-widest text-[#d4af37] mb-4 font-bold">Our Location</h4>
+                        <p class="text-3xl font-serif font-light mb-8 leading-tight">124 Coffee Lane, Arts District<br/>New Delhi, India 110001</p>
+                        <button onclick="openDirections()" class="flex items-center gap-3 text-xs uppercase tracking-widest border border-white/20 px-10 py-5 rounded-full hover:bg-white hover:text-black transition-all font-bold">Get Directions <i data-lucide="arrow-right" size="16"></i></button>
+                    </div>
+                    <div class="bg-white/5 p-12 rounded-[50px] border border-white/10">
+                        <i data-lucide="clock" class="text-[#d4af37] mb-8" size="32"></i>
+                        <h4 class="text-[10px] uppercase tracking-widest text-[#d4af37] mb-4 font-bold">Trading Hours</h4>
+                        <div class="space-y-8">
+                            <div><p class="text-white/40 text-[10px] uppercase tracking-widest mb-2 font-bold">Mon — Fri</p><p class="text-2xl font-serif font-light">07:00 – 23:00</p></div>
+                            <div><p class="text-white/40 text-[10px] uppercase tracking-widest mb-2 font-bold">Sat — Sun</p><p class="text-2xl font-serif font-light">08:00 – 22:00</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-[#0f0a07] text-white pt-20 pb-10 px-6 border-t border-white/5">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 text-left">
+            <div class="col-span-1 md:col-span-2">
+                <div class="text-2xl font-serif font-bold tracking-tighter mb-6">VELVET<span class="text-[#d4af37]">ROAST</span></div>
+                <p class="text-white/50 max-w-sm leading-relaxed text-sm">Crafting exceptional sensory experiences through sustainably sourced beans and precision roasting. Your sanctuary in the heart of the city.</p>
+            </div>
+            <div>
+                <h4 class="text-[#d4af37] text-xs uppercase tracking-widest mb-6 font-bold">Contact Us</h4>
+                <p onclick="openDirections()" class="text-white/70 text-sm mb-2 underline underline-offset-4 cursor-pointer">124 Coffee Lane, Arts District</p>
+                <p class="text-white/70 text-sm">+91 98765 43210</p>
+            </div>
+            <div>
+                <h4 class="text-[#d4af37] text-xs uppercase tracking-widest mb-6 font-bold">Social</h4>
+                <div class="flex space-x-4">
+                    <i data-lucide="instagram" size="20" class="hover:text-[#d4af37] cursor-pointer"></i>
+                    <i data-lucide="facebook" size="20" class="hover:text-[#d4af37] cursor-pointer"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const menuData = [
+            { id: 1, category: 'COFFEE', name: "Espresso", price: "₹90", desc: "Pure intense coffee essence with a rich crema", img: "https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?q=80&w=600" },
+            { id: 2, category: 'COFFEE', name: "Cappuccino", price: "₹130", desc: "Equal parts espresso, steamed milk, and airy foam", img: "https://images.unsplash.com/photo-1534778101976-62847782c213?q=80&w=600" },
+            { id: 3, category: 'COFFEE', name: "Latte", price: "₹150", desc: "Smooth espresso balanced with silky steamed milk", img: "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?q=80&w=600" },
+            { id: 4, category: 'COFFEE', name: "Americano", price: "₹110", desc: "Classic espresso shots topped with hot water", img: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=600" },
+            { id: 5, category: 'COFFEE', name: "Mocha", price: "₹170", desc: "Rich chocolate and espresso finished with whipped cream", img: "https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?q=80&w=600" },
+            { id: 6, category: 'PASTRY', name: "Golden Puff", price: "₹95", desc: "Flaky, buttery layers filled with seasonal savory cream", img: "https://images.unsplash.com/photo-1623334044303-241021148842?q=80&w=600" },
+            { id: 7, category: 'PASTRY', name: "Fruit Tart", price: "₹140", desc: "Shortcrust pastry with vanilla custard and fresh berries", img: "https://images.unsplash.com/photo-1519915028121-7d3463d20b13?q=80&w=600" },
+            { id: 10, category: 'PASTRY', name: "Blueberry Cheesecake", price: "₹180", desc: "Classic New York style with a tangy blueberry glaze", img: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?q=80&w=600" },
+            { id: 11, category: 'LUNCH', name: "Pesto Pasta", price: "₹240", desc: "Penne tossed in fresh basil pesto with cherry tomatoes", img: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=800" },
+            { id: 12, category: 'LUNCH', name: "Arrabbiata Pasta", price: "₹220", desc: "Spicy tomato sauce with garlic and red chili flakes", img: "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?q=80&w=600" },
+            { id: 13, category: 'LUNCH', name: "Veg Sandwich", price: "₹130", desc: "Toasted panini filled with fresh vegetables and pesto", img: "https://images.unsplash.com/photo-1521390188846-e2a3a97453a0?q=80&w=600" }
+        ];
+
+        function showPage(pageId) {
+            const sections = document.querySelectorAll('.page-section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const navbar = document.getElementById('navbar');
+            sections.forEach(s => s.classList.add('hidden'));
+            document.getElementById(pageId).classList.remove('hidden');
+            navLinks.forEach(l => {
+                l.classList.remove('active');
+                if(l.getAttribute('data-page') === pageId) l.classList.add('active');
+            });
+            if (pageId === 'menu' || pageId === 'about') {
+                navbar.classList.add('text-black');
+                navbar.classList.remove('text-white');
+            } else {
+                navbar.classList.add('text-white');
+                navbar.classList.remove('text-black');
+            }
+            window.scrollTo(0,0);
+            toggleMobileMenu(false);
+        }
+
+        function toggleMobileMenu(open) {
+            const menu = document.getElementById('mobileMenu');
+            menu.style.display = open ? 'flex' : 'none';
+        }
+
+        function openDirections() {
+            // Address of Arts District, New Delhi for Google Maps search
+            const address = "Arts District New Delhi India 110001";
+            const encodedAddress = encodeURIComponent(address);
+            const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+            window.open(mapsUrl, '_blank');
+        }
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        });
+
+        function renderMenu(filter = 'ALL') {
+            const grid = document.getElementById('menu-grid');
+            grid.innerHTML = '';
+            const filtered = filter === 'ALL' ? menuData : menuData.filter(i => i.category === filter);
+            filtered.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'group text-left fade-in';
+                div.innerHTML = `
+                    <div class="overflow-hidden rounded-3xl mb-6 aspect-square relative shadow-sm bg-gray-100">
+                        <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1473093226795-af9932fe5855?q=80&w=800'" />
+                        <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-all"></div>
+                    </div>
+                    <div class="flex justify-between items-baseline mb-2 px-2">
+                        <h3 class="text-2xl font-serif text-[#0f0a07]">${item.name}</h3>
+                        <span class="text-[#d4af37] font-bold text-lg">${item.price}</span>
+                    </div>
+                    <p class="text-sm text-gray-400 font-light leading-relaxed px-2">${item.desc}</p>
+                `;
+                grid.appendChild(div);
+            });
+        }
+
+        function filterMenu(cat) {
+            const btns = document.querySelectorAll('.filter-btn');
+            btns.forEach(b => {
+                b.className = 'filter-btn bg-white border-gray-100 text-gray-400 px-10 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 border hover:border-gray-300';
+                if(b.getAttribute('data-filter') === cat) {
+                    b.className = 'filter-btn bg-[#d4af37] border-[#d4af37] text-black px-10 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 border shadow-lg';
+                }
+            });
+            renderMenu(cat);
+        }
+
+        document.getElementById('booking-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const container = document.getElementById('booking-form-container');
+            container.innerHTML = `
+                <div class="text-center py-10 animate-in fade-in">
+                    <i data-lucide="check-circle-2" class="text-green-500 mx-auto mb-6" size="48"></i>
+                    <h3 class="text-3xl font-serif mb-4 text-green-500">Table Booked!</h3>
+                    <p class="text-white/40 mb-8">We've saved a spot for you. See you soon.</p>
+                    <button onclick="location.reload()" class="text-[#d4af37] text-xs uppercase tracking-widest border border-[#d4af37]/30 px-8 py-4 rounded-full font-bold">New Booking</button>
+                </div>
+            `;
+            lucide.createIcons();
+        });
+
+        window.onload = () => {
+            lucide.createIcons();
+            renderMenu();
+        };
+    </script>
+</body>
+</html>
